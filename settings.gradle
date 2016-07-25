@@ -16,4 +16,4 @@ include 'api'
 include 'services:webservice'
 */
 
-rootProject.name = 'fireup-editor'
+rootProject.name = 'OmegaNote'
