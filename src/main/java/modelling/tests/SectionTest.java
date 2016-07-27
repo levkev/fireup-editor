@@ -9,27 +9,30 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 
 import modelling.Section;
 import modelling.Title;
 import modelling.interfaces.ITitle;
 
 public class SectionTest {
-
+	@Rule
+	public TemporaryFolder tmp = new TemporaryFolder();
+	
 	@Test
 	public void canReadNameOfSection() throws IOException {
-		File file = new File("tmp/test1.tmp");
+		File file = tmp.newFile("test1.tmp");
 		FileWriter writer = new FileWriter(file);
 		writer.write("name\ngugus");
 		writer.close();
 		assertEquals("name", new Section(file).getName());
-		file.delete();
 	}
 	
 	@Test
 	public void recognisesTitlesAndTheirDegrees() throws IOException {
-		File file = new File("tmp/test2.tmp");
+		File file = tmp.newFile("test2.tmp");
 		FileWriter writer = new FileWriter(file);
 		ArrayList<ITitle> titles = new ArrayList<ITitle>();
 		titles.add(new Title("title1", 1));
@@ -43,23 +46,21 @@ public class SectionTest {
 			assertEquals(titles.get(i).getTitle(), sectionTitles.get(i).getTitle());
 			assertEquals(titles.get(i).getDegree(), sectionTitles.get(i).getDegree());
 		}
-		file.delete();
 	}
 	
 	@Test
 	public void recognisesContent() throws IOException {
-		File file = new File("tmp/test3.tmp");
+		File file = tmp.newFile("test3.tmp");
 		FileWriter writer = new FileWriter(file);
 		writer.write("name\ngugus");
 		writer.close();
 		Section section = new Section(file);
 		assertEquals("gugus", section.getContent());
-		file.delete();
 	}
 	
 	@Test
 	public void sectionCanBeSaved() throws IOException, FileNotFoundException {
-		File file = new File("tmp/test4.tmp");
+		File file = tmp.newFile("test4.tmp");
 		FileWriter writer = new FileWriter(file);
 		writer.write("name\ngugus");
 		writer.close();
@@ -68,27 +69,24 @@ public class SectionTest {
 		assertEquals("newGugus", section.getContent());
 		assertEquals("newName", section.getName());
 		assertEquals("newName\nnewGugus", contentOf(file));
-		file.delete();
 	}
 	
 	@Test
 	public void canHandleEmptySection() throws IOException {
 		// file containing empty strings
-		File file = new File("tmp/test5.tmp");
+		File file = tmp.newFile("test5.tmp");
 		FileWriter writer = new FileWriter(file);
 		writer.write("");
 		writer.close();
 		Section section = new Section(file);
 		assertEquals("", section.getName());
 		assertEquals("", section.getContent());
-		file.delete();
 		
 		// file not containing anything
-		file = new File("test5");
+		file = tmp.newFile("test6.tmp");
 		section = new Section(file);
 		assertEquals("", section.getName());
 		assertEquals("", section.getContent());
-		file.delete();
 	}
 	
 	private String contentOf(File file) throws FileNotFoundException {

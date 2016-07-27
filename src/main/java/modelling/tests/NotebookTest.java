@@ -2,39 +2,25 @@ package modelling.tests;
 
 import static org.junit.Assert.*;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 
 import modelling.Notebook;
 
 public class NotebookTest {
+	@Rule
+	public TemporaryFolder tmp = new TemporaryFolder();
 
 	@Test
 	public void addsSections() throws IOException {
-		File sectionFolder = new File("tmp/Sections");
-		sectionFolder.mkdirs();
-		File section1 = new File("tmp/Sections/section1");
-		File section2 = new File("tmp/Sections/section2");
-		
-		FileWriter writer1 = new FileWriter(section1);
-		writer1.write("a");
-		writer1.close();
-		section1.createNewFile();
-		
-		FileWriter writer2 = new FileWriter(section2);
-		writer2.write("b");
-		writer2.close();
-		section2.createNewFile();
-		
-		Notebook notebook = new Notebook("tmp");
+		tmp.newFolder("Sections");
+		tmp.newFile("Sections/section1");
+		tmp.newFile("Sections/section2");
+		Notebook notebook = new Notebook(tmp.getRoot());
 		assertEquals(2, notebook.getSections().size());
-		
-		section1.delete();
-		section2.delete();
-		sectionFolder.delete();
 	}
 
 }
