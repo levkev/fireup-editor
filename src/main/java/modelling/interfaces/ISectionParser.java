@@ -1,8 +1,8 @@
 package modelling.interfaces;
 
 /**
- * Parses md text files to return plain HTML.
+ * Parses section content to return plain HTML.
  */
 public interface ISectionParser {
-	public String parseFile(String markdownContent);
+	public String parseFile(ISection section);
 }
