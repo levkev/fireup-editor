@@ -12,7 +12,4 @@ public interface INotebook {
 	public String getName();
 	public String getPath();
 	public ArrayList<ISection> getSections();
-	
-	// public boolean hasCustomOutputCss();
-	// public boolean hasCustomPrintCss();
 }

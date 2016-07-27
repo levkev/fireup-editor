@@ -11,5 +11,4 @@ public class MarkdownProcessor implements IMarkdownProcessor {
 		PegDownProcessor processor = new PegDownProcessor();
 		return processor.markdownToHtml(markdownContent);
 	}
-	
 }

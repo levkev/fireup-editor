@@ -15,12 +15,7 @@ public class Title implements ITitle {
 		degree = line.length() - line.replace("#", "").length();
 		title = line.replace("#", "");
 	}
-	
-	/*public Title(String title, int degree) {
-		this.title = title;
-		this.degree = degree;
-	}*/
-	
+
 	@Override
 	public String getTitle() {
 		return title;	
@@ -36,6 +31,12 @@ public class Title implements ITitle {
 		return title;
 	}
 	
+	/**
+	 * Assumes that the object the title is being compared to
+	 * is actually a title object. Will throw an exception if
+	 * being compared to any other object.
+	 */
+	@Override
 	public boolean equals(Object otherTitle) {
 		return (title == ((Title)otherTitle).getTitle() 
 				&& degree == ((Title)otherTitle).getDegree());

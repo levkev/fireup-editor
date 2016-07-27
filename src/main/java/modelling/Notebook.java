@@ -8,22 +8,30 @@ import modelling.interfaces.ISection;
 import java.io.File;
 
 public class Notebook implements INotebook {
-
+	
+	/**
+	 * Describes the name of the directory that holds the
+	 * section files.
+	 */
 	public final String DIR_CONTAINING_SECTIONS = "Sections";
 	
 	private String name;
 	private String path;
 	private ArrayList<ISection> sections;
 	
+	/**
+	 * Creates a notebook with all its sections. Its name
+	 * will be the name of its home directory.
+	 * @param path the path as a string
+	 */
 	public Notebook(String path) {
 		this.name = new File(path).getName();
 		this.path = path;
-		File[] sectionFiles = findSections(path);
 		this.sections = new ArrayList<ISection>();
+		File[] sectionFiles = findSections();
 		generateSections(sectionFiles);
 	}
 	
-
 	private void generateSections(File[] sectionFiles) {
 		if (sectionFiles == null) return;
 		for (File file : sectionFiles) {
@@ -36,10 +44,10 @@ public class Notebook implements INotebook {
 	 * Assumes that sections are stored in the directory
 	 * called Sections. 
 	 * 
-	 * @param path the path of the notebook
+	 * @param path - the path of the notebook
 	 * @return all sections in the notebook as a files array
 	 */
-	private File[] findSections(String path) {
+	private File[] findSections() {
 		File[] sectionFiles;
 		File[] files = new File(path).listFiles();
 		if (files == null) return null;
@@ -68,5 +76,4 @@ public class Notebook implements INotebook {
 	public ArrayList<ISection> getSections() {
 		return sections;
 	}
-
 }

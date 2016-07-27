@@ -21,8 +21,7 @@ public interface ISection {
 	/**
 	 * Saves the file to hold the new content. Also updates the section 
 	 * instance according to the received string.
-	 * @param content - everything to store in the file, this includes
-	 * its name
+	 * @param contentIncludingName - markdown content of the section
 	 */
 	public void save(String contentIncludingName) throws IOException;
 }

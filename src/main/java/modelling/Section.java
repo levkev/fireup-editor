@@ -69,10 +69,16 @@ public class Section implements ISection {
 		lineScanner.close();
 		return titles;
 	}
-
+	
 	private String firstLineOf(String s) {
 		if (!s.contains("\n")) return s;
 		return s.substring(0, s.indexOf("\n"));
+	}
+	
+	private String withoutFirstLine(String s) {
+		int i = s.indexOf("\n");
+		if (i == -1) return ""; // one lined string
+		return s.substring(i);
 	}
 	
 	/**
@@ -86,15 +92,6 @@ public class Section implements ISection {
 		FileWriter writer = new FileWriter(file);
 		writer.write(contentIncludingName);
 		writer.close();
-	}
-	
-	private String withoutFirstLine(String s) {
-		if (!s.contains("\n")) return "";
- 		try {
-			return s.substring(s.indexOf("\n")+1);
-		} catch (IndexOutOfBoundsException e) {
-			return "";
-		}
 	}
 
 	@Override
