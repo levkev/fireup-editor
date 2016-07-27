@@ -7,10 +7,19 @@ public class Title implements ITitle {
 	private String title;
 	private int degree;
 	
-	public Title(String title, int degree) {
+	/**
+	 * Constructs a title object from a string object
+	 * @param line - title containing the #-symbols.
+	 */
+	public Title(String line) {
+		degree = line.length() - line.replace("#", "").length();
+		title = line.replace("#", "");
+	}
+	
+	/*public Title(String title, int degree) {
 		this.title = title;
 		this.degree = degree;
-	}
+	}*/
 	
 	@Override
 	public String getTitle() {

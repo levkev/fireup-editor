@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import org.junit.Rule;
@@ -14,8 +13,6 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import modelling.Section;
-import modelling.Title;
-import modelling.interfaces.ITitle;
 
 public class SectionTest {
 	@Rule
@@ -31,23 +28,13 @@ public class SectionTest {
 	}
 	
 	@Test
-	public void recognisesTitlesAndTheirDegrees() throws IOException {
+	public void recognisesTitles() throws IOException {
 		File file = tmp.newFile("test2.tmp");
 		FileWriter writer = new FileWriter(file);
-		ArrayList<ITitle> titles = new ArrayList<ITitle>();
-		titles.add(new Title("title1", 1));
-		titles.add(new Title("title2", 1));
-		titles.add(new Title("title3", 3));
 		writer.write("name\n\n#title1\n\nsomething\n#title2\n###title3");
 		writer.close();
 		Section section = new Section(file);
-		ArrayList<ITitle> sectionTitles = section.getTitles();
-		
-		// the ArrayList.equals method seems to suck
-		for (int i = 0; i < 3; i++) {
-			assertEquals(titles.get(i).getTitle(), sectionTitles.get(i).getTitle());
-			assertEquals(titles.get(i).getDegree(), sectionTitles.get(i).getDegree());
-		}
+		assertEquals(3, section.getTitles().size());
 	}
 	
 	@Test
@@ -100,6 +87,17 @@ public class SectionTest {
 		Section section = new Section(file);
 		assertEquals("name", section.getName());
 		assertEquals("", section.getContent());
+	}
+	
+	@Test
+	public void savingSectionAlsoUpdatesTitles() throws IOException {
+		File file = tmp.newFile("test8.tmp");
+		FileWriter writer = new FileWriter(file);
+		writer.write("name\n#gugus");
+		writer.close();
+		Section section = new Section(file);
+		section.save("newName\n##gugus");
+		assertEquals(2, section.getTitles().get(0).getDegree());
 	}
 	
 	private String contentOf(File file) throws FileNotFoundException {

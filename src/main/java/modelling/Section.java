@@ -1,9 +1,7 @@
 package modelling;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,9 +35,10 @@ public class Section implements ISection {
 	private File file;
 	
 	public Section(File file) {
-		name = firstLineOf(file);
-		content = readContent(file);
-		titles = findTitles(file);
+		String fileContent = readContent(file);
+		name = firstLineOf(fileContent);
+		content = withoutFirstLine(fileContent);
+		titles = findTitles();
 		this.file = file;
 	}
 	
@@ -47,7 +46,7 @@ public class Section implements ISection {
 		String content = null;
 		try {
 			Scanner scanner = new Scanner(file);
-			content = withoutFirstLine(scanner.useDelimiter("\\A").next());
+			content = scanner.useDelimiter("\\A").next();
 			scanner.close();
 		} catch (FileNotFoundException e) { 
 			e.printStackTrace();
@@ -57,62 +56,30 @@ public class Section implements ISection {
 		return content;
 	}
 	
-	private ArrayList<ITitle> findTitles(File file) {
-		try {
-			ArrayList<ITitle> titles = new ArrayList<ITitle>();
-			FileReader fileReader = new FileReader(file);
-			BufferedReader lineReader = new BufferedReader(fileReader);
-			String line = lineReader.readLine();
-			while (line != null) {
-				if (line.startsWith("#")) {
-					int degree = line.length() - line.replace("#", "").length();
-					String name = line.replace("#", "");
-					titles.add(new Title(name, degree));
-				}
-				line = lineReader.readLine();
+	private ArrayList<ITitle> findTitles() {
+		ArrayList<ITitle> titles = new ArrayList<ITitle>();
+		@SuppressWarnings("resource") // eclipse does not notice that the scanner will be closed
+		Scanner lineScanner = new Scanner(content).useDelimiter("\n");
+		while (lineScanner.hasNext()) {
+			String line = lineScanner.next();
+			if (line.startsWith("#")) {
+				titles.add(new Title(line));
 			}
-			lineReader.close();
-			return titles;
-			
-		} catch (FileNotFoundException e) {
-			e.printStackTrace(); 
-		} catch (IOException e) { 
-			e.printStackTrace(); 
 		}
-		return null;
+		lineScanner.close();
+		return titles;
 	}
 
-	// TODO: more elegant solution
-	private String firstLineOf(File file) {
-		try {
-			String name;
-			FileReader fileReader = new FileReader(file);
-			BufferedReader nameReader = new BufferedReader(fileReader);
-			name = nameReader.readLine();
-			nameReader.close();
-			if (name == null) return "";
-			return name;
-		} catch (FileNotFoundException e) {
-			e.printStackTrace(); 
-		} catch (IOException e) { 
-			e.printStackTrace(); 
-		}
-		return "";
-	}
-	
 	private String firstLineOf(String s) {
+		if (!s.contains("\n")) return s;
 		return s.substring(0, s.indexOf("\n"));
 	}
 	
-	/**
-	 * 
-	 * @param contentIncludingName
-	 * @throws IOException
-	 */
 	@Override
 	public void save(String contentIncludingName) throws IOException {
 		name = firstLineOf(contentIncludingName);
 		content = withoutFirstLine(contentIncludingName);
+		titles = findTitles();
 		FileWriter writer = new FileWriter(file);
 		writer.write(contentIncludingName);
 		writer.close();
