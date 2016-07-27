@@ -1,9 +1,8 @@
 package modelling.interfaces;
 
 /**
- * Data class for managing titles and their degree (e.g. 
- * <code>#FirstDegreeTitle</code>, 
- * <code>##SecondDegreeTitle</code>).
+ * Data class for managing titles and their degree. Constructor
+ * should be able to create instances from strings like "#title".
  */
 public interface ITitle {
 	public String getTitle();

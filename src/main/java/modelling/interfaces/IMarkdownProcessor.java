@@ -5,5 +5,5 @@ package modelling.interfaces;
  * plaintext files into HTML strings.<br><br>
  */
 public interface IMarkdownProcessor {
-	public String processSection(String markdownContent);
+	public String markdownToHtml(String markdownContent);
 }

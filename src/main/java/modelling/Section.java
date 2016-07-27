@@ -75,6 +75,9 @@ public class Section implements ISection {
 		return s.substring(0, s.indexOf("\n"));
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void save(String contentIncludingName) throws IOException {
 		name = firstLineOf(contentIncludingName);
@@ -104,6 +107,9 @@ public class Section implements ISection {
 		return titles;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String getContent() {
 		return content;
