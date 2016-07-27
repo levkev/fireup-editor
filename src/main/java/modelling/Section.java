@@ -78,7 +78,7 @@ public class Section implements ISection {
 	private String withoutFirstLine(String s) {
 		int i = s.indexOf("\n");
 		if (i == -1) return ""; // one lined string
-		return s.substring(i);
+		return s.substring(i + 1);
 	}
 	
 	/**
