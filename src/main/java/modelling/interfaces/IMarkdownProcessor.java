@@ -1,4 +1,4 @@
-package modelling;
+package modelling.interfaces;
 
 /**
  * Is responsible for processing markdown section

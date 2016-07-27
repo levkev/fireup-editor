@@ -1,4 +1,4 @@
-package modelling;
+package modelling.interfaces;
 
 import java.io.IOException;
 import java.util.ArrayList;

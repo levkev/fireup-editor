@@ -1,4 +1,4 @@
-package modelling;
+package modelling.interfaces;
 
 /**
  * Parses md text files to return plain HTML.

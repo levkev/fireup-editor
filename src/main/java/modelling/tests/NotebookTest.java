@@ -1,4 +1,4 @@
-package modelling;
+package modelling.tests;
 
 import static org.junit.Assert.*;
 
@@ -7,6 +7,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import org.junit.Test;
+
+import modelling.Notebook;
 
 public class NotebookTest {
 

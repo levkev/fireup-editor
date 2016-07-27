@@ -1,5 +1,7 @@
 package modelling;
 
+import modelling.interfaces.ITitle;
+
 public class Title implements ITitle {
 
 	private String title;

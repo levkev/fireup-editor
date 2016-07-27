@@ -1,4 +1,4 @@
-package modelling;
+package modelling.interfaces;
 
 /**
  * Data class for managing titles and their degree (e.g. 

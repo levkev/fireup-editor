@@ -1,4 +1,4 @@
-package modelling;
+package modelling.tests;
 
 import static org.junit.Assert.*;
 
@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import org.junit.Test;
+
+import modelling.Section;
+import modelling.Title;
+import modelling.interfaces.ITitle;
 
 public class SectionTest {
 

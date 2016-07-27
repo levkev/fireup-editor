@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+import modelling.interfaces.ISection;
+import modelling.interfaces.ITitle;
+
 public class Section implements ISection {
 
 	/**

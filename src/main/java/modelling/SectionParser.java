@@ -1,5 +1,7 @@
 package modelling;
 
+import modelling.interfaces.ISectionParser;
+
 public class SectionParser implements ISectionParser {
 
 	

@@ -1,6 +1,10 @@
 package modelling;
 
 import java.util.ArrayList;
+
+import modelling.interfaces.INotebook;
+import modelling.interfaces.ISection;
+
 import java.io.File;
 
 public class Notebook implements INotebook {

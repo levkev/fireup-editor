@@ -1,5 +1,7 @@
 package modelling;
 
+import modelling.interfaces.IMarkdownProcessor;
+import modelling.interfaces.ISection;
 
 public class MarkdownProcessor implements IMarkdownProcessor {
 
