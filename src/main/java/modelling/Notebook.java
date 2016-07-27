@@ -16,14 +16,6 @@ public class Notebook implements INotebook {
 	private ArrayList<ISection> sections;
 	
 	public Notebook(String path) {
-		build(path);
-	}
-	
-	public Notebook(File dir) {
-		build(dir.getPath());
-	}
-
-	private void build(String path) {
 		this.name = new File(path).getName();
 		this.path = path;
 		File[] sectionFiles = findSections(path);

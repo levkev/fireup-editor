@@ -19,7 +19,7 @@ public class NotebookTest {
 		tmp.newFolder("Sections");
 		tmp.newFile("Sections/section1");
 		tmp.newFile("Sections/section2");
-		Notebook notebook = new Notebook(tmp.getRoot());
+		Notebook notebook = new Notebook(tmp.getRoot().getPath());
 		assertEquals(2, notebook.getSections().size());
 	}
 
