@@ -19,7 +19,7 @@ public class SectionTest {
 
 	@Test
 	public void canReadNameOfSection() throws IOException {
-		File file = new File("test1");
+		File file = new File("tmp/test1.tmp");
 		FileWriter writer = new FileWriter(file);
 		writer.write("name\ngugus");
 		writer.close();
@@ -29,7 +29,7 @@ public class SectionTest {
 	
 	@Test
 	public void recognisesTitlesAndTheirDegrees() throws IOException {
-		File file = new File("test2");
+		File file = new File("tmp/test2.tmp");
 		FileWriter writer = new FileWriter(file);
 		ArrayList<ITitle> titles = new ArrayList<ITitle>();
 		titles.add(new Title("title1", 1));
@@ -48,7 +48,7 @@ public class SectionTest {
 	
 	@Test
 	public void recognisesContent() throws IOException {
-		File file = new File("test3");
+		File file = new File("tmp/test3.tmp");
 		FileWriter writer = new FileWriter(file);
 		writer.write("name\ngugus");
 		writer.close();
@@ -59,7 +59,7 @@ public class SectionTest {
 	
 	@Test
 	public void sectionCanBeSaved() throws IOException, FileNotFoundException {
-		File file = new File("test4");
+		File file = new File("tmp/test4.tmp");
 		FileWriter writer = new FileWriter(file);
 		writer.write("name\ngugus");
 		writer.close();
@@ -74,7 +74,7 @@ public class SectionTest {
 	@Test
 	public void canHandleEmptySection() throws IOException {
 		// file containing empty strings
-		File file = new File("test5");
+		File file = new File("tmp/test5.tmp");
 		FileWriter writer = new FileWriter(file);
 		writer.write("");
 		writer.close();
