@@ -42,6 +42,8 @@ public class SectionTest {
 		writer.close();
 		Section section = new Section(file);
 		ArrayList<ITitle> sectionTitles = section.getTitles();
+		
+		// the ArrayList.equals method seems to suck
 		for (int i = 0; i < 3; i++) {
 			assertEquals(titles.get(i).getTitle(), sectionTitles.get(i).getTitle());
 			assertEquals(titles.get(i).getDegree(), sectionTitles.get(i).getDegree());
@@ -86,6 +88,17 @@ public class SectionTest {
 		file = tmp.newFile("test6.tmp");
 		section = new Section(file);
 		assertEquals("", section.getName());
+		assertEquals("", section.getContent());
+	}
+	
+	@Test
+	public void sectionWithNameAndNoContentIsProperlyRecognised() throws IOException {
+		File file = tmp.newFile("test7.tmp");
+		FileWriter writer = new FileWriter(file);
+		writer.write("name");
+		writer.close();
+		Section section = new Section(file);
+		assertEquals("name", section.getName());
 		assertEquals("", section.getContent());
 	}
 	
