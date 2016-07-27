@@ -1,7 +1,5 @@
 package modelling;
 
-import org.pegdown.PegDownProcessor;
-
 import modelling.interfaces.ISection;
 import modelling.interfaces.ISectionParser;
 
