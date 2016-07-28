@@ -5,11 +5,13 @@ import java.io.IOException;
 import ch.levkev.omeganote.MainApp;
 import ch.levkev.omeganote.modelling.interfaces.ISection;
 import ch.levkev.omeganote.modelling.interfaces.ITitle;
+import ch.levkev.omeganote.modelling.SectionParser;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
 public class SectionController {
@@ -60,8 +62,10 @@ public class SectionController {
     
     
     private void parseContent() {
-		// TODO Auto-generated method stub
-		
+    	SectionParser parser = new SectionParser();
+    	String parsedContent = parser.sectionToHtml(section);
+    	WebEngine engine = output.getEngine();
+    	engine.loadContent(parsedContent);
 	}
 
 	private void loadTitles() {
@@ -94,5 +98,6 @@ public class SectionController {
     		alert.showAndWait();
     	}
     	this.loadTitles();
+    	this.parseContent();
     }
 }
