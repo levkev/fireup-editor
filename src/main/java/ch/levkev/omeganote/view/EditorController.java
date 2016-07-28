@@ -85,7 +85,6 @@ public class EditorController {
     	tab.setOnSelectionChanged(new EventHandler<Event>() {
             @Override
             public void handle(Event t) {
-            	System.out.println("handle");
                 if (tab.isSelected()) {
                 	onNewTabClicked();
                 }
