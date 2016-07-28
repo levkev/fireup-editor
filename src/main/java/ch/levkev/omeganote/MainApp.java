@@ -2,6 +2,10 @@ package ch.levkev.omeganote;
 
 import java.io.IOException;
 
+import ch.levkev.omeganote.modelling.Notebook;
+import ch.levkev.omeganote.view.EditorController;
+import ch.levkev.omeganote.view.NotebookController;
+import ch.levkev.omeganote.view.RootController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -18,6 +22,7 @@ public class MainApp extends Application {
 
 	private Stage primaryStage;
 	private BorderPane rootLayout;
+	private Notebook currentNotebook;
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -43,6 +48,9 @@ public class MainApp extends Application {
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
             primaryStage.show();
+            
+            RootController controller = loader.getController();
+            controller.setMainApp(this);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -53,18 +61,43 @@ public class MainApp extends Application {
      */
     public void showEditorView() {
         try {
-            // Load person overview.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/EditorView.fxml"));
-            AnchorPane personOverview = (AnchorPane) loader.load();
+            AnchorPane editorView = (AnchorPane) loader.load();
 
-            // Set person overview into the center of root layout.
-            rootLayout.setCenter(personOverview);
+            rootLayout.setCenter(editorView);
+            
+            EditorController controller = loader.getController();
+            controller.setMainApp(this);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    public void showNotebookView() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/NotebookView.fxml"));
+            AnchorPane notebookView = (AnchorPane) loader.load();
+
+            rootLayout.setCenter(notebookView);
+            
+            NotebookController controller = loader.getController();
+            controller.setMainApp(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void setCurrentNotebook(Notebook nb) {
+    	assert(nb != null);
+    	this.currentNotebook = nb;
+    }
+    
+    public Notebook getCurrentNotebook() {
+    	return this.currentNotebook;
+    }
+    
     /**
      * Returns the main stage.
      * @return
@@ -72,7 +105,9 @@ public class MainApp extends Application {
     public Stage getPrimaryStage() {
         return primaryStage;
     }
+    
 	public static void main(String[] args) {
 		launch(args);
 	}
+	
 }

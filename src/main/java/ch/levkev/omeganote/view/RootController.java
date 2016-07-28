@@ -36,11 +36,11 @@ public class RootController {
     
     @FXML
     private void onEditorButtonClicked() {
-    	
+    	this.mainApp.showEditorView();
     }
     
     @FXML
     private void onNotebookButtonClicked() {
-    	
+    	this.mainApp.showNotebookView();
     }
 }

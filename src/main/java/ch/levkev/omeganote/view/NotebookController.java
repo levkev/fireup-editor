@@ -1,11 +1,16 @@
 package ch.levkev.omeganote.view;
 
+import java.io.File;
+
 import ch.levkev.omeganote.MainApp;
+import ch.levkev.omeganote.modelling.Notebook;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.web.WebView;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 
 public class NotebookController {
     private MainApp mainApp;
@@ -33,6 +38,13 @@ public class NotebookController {
     
     @FXML
     private void onOpenButtonClicked() {
+    	DirectoryChooser dirChooser = new DirectoryChooser();
+    	dirChooser.setTitle("Open Resource File");
+    	File selectedDir = dirChooser.showDialog(this.mainApp.getPrimaryStage());
     	
+    	
+    	Notebook nb = new Notebook(selectedDir.getPath());
+    	this.mainApp.setCurrentNotebook(nb);
+    	this.mainApp.showEditorView();
     }
 }
