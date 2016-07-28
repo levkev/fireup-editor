@@ -22,7 +22,7 @@ public class SectionController {
     private WebView output;
     
     @FXML
-    private ListView titlesList;
+    private ListView<ITitle> titlesList;
     
     private ISection section;
     
@@ -67,7 +67,7 @@ public class SectionController {
 	private void loadTitles() {
 		this.titlesList.getItems().clear();
 		for (ITitle title : this.section.getTitles()) {
-			this.titlesList.getItems().add(title.getTitle());
+			this.titlesList.getItems().add(title);
 		}
 	}
 

@@ -28,7 +28,11 @@ public class Title implements ITitle {
 
 	@Override
 	public String toString() {
-		return title;
+		String spaces = "";
+		for (int i = 1; i < degree; i++) {
+			spaces += "  ";
+		}
+		return spaces + title;
 	}
 	
 	/**
