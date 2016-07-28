@@ -1,4 +1,4 @@
-package view;
+package ch.levkev.omeganote;
 
 import java.io.IOException;
 

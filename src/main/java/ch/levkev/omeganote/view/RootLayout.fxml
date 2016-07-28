@@ -6,17 +6,16 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-
-<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.65">
+<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.levkev.omeganote.view.RootController">
    <top>
       <HBox prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" text="Button">
+            <Button fx:id="notebookButton" mnemonicParsing="false" onMouseClicked="#onNotebookButtonClicked" text="Notebook">
                <HBox.margin>
                   <Insets right="50.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" text="Button">
+            <Button fx:id="editorButton" mnemonicParsing="false" onMouseClicked="#onEditorButtonClicked" text="Editor">
                <HBox.margin>
                   <Insets right="50.0" />
                </HBox.margin>
