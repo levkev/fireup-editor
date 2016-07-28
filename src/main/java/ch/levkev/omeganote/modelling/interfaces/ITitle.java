@@ -1,4 +1,4 @@
-package modelling.interfaces;
+package ch.levkev.omeganote.modelling.interfaces;
 
 /**
  * Data class for managing titles and their degree. Constructor

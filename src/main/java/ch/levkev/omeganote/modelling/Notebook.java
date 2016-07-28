@@ -1,9 +1,9 @@
-package modelling;
+package ch.levkev.omeganote.modelling;
 
 import java.util.ArrayList;
 
-import modelling.interfaces.INotebook;
-import modelling.interfaces.ISection;
+import ch.levkev.omeganote.modelling.interfaces.INotebook;
+import ch.levkev.omeganote.modelling.interfaces.ISection;
 
 import java.io.File;
 
@@ -13,7 +13,7 @@ public class Notebook implements INotebook {
 	 * Describes the name of the directory that holds the
 	 * section files.
 	 */
-	public final String DIR_CONTAINING_SECTIONS = "Sections";
+	public static final String DIR_CONTAINING_SECTIONS = "Sections";
 	
 	private String name;
 	private String path;
@@ -28,11 +28,11 @@ public class Notebook implements INotebook {
 		this.name = new File(path).getName();
 		this.path = path;
 		this.sections = new ArrayList<ISection>();
-		File[] sectionFiles = findSections();
+		ArrayList<File> sectionFiles = findSections();
 		generateSections(sectionFiles);
 	}
 	
-	private void generateSections(File[] sectionFiles) {
+	private void generateSections(ArrayList<File> sectionFiles) {
 		if (sectionFiles == null) return;
 		for (File file : sectionFiles) {
 			sections.add(new Section(file));
@@ -42,24 +42,31 @@ public class Notebook implements INotebook {
 	/**
 	 * Scans the notebook for files describing sections.
 	 * Assumes that sections are stored in the directory
-	 * called Sections. 
+	 * called Sections and that they end with .md
 	 * 
 	 * @param path - the path of the notebook
 	 * @return all sections in the notebook as a files array
 	 */
-	private File[] findSections() {
-		File[] sectionFiles;
+	private ArrayList<File> findSections() {
 		File[] files = new File(path).listFiles();
-		if (files == null) return null;
-		for (File file : files) {
-			if (file.isDirectory()) {
-				if (file.getName().equals(DIR_CONTAINING_SECTIONS)) {
-					sectionFiles = file.listFiles();
-					return sectionFiles;
-				}
+		File[] potentialSectionFiles = findPotentialSectionFiles(files);
+		return recogniseSections(potentialSectionFiles);
+	}
+
+	private File[] findPotentialSectionFiles(File[] files) {
+		File sectionDir = new File(path + "/" + DIR_CONTAINING_SECTIONS);
+		sectionDir.mkdir();
+		return sectionDir.listFiles();
+	}
+	
+	private ArrayList<File> recogniseSections(File[] potentialSectionFiles) {
+		ArrayList<File> sectionFiles = new ArrayList<File>();
+		for (File file : potentialSectionFiles) {
+			if (file.getName().endsWith(Section.SECTION_SUFFIX)) {
+				sectionFiles.add(file);
 			}
 		}
-		return null;
+		return sectionFiles;
 	}
 	
 	@Override

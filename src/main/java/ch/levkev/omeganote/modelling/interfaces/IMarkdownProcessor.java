@@ -1,4 +1,4 @@
-package modelling.interfaces;
+package ch.levkev.omeganote.modelling.interfaces;
 
 /**
  * Is responsible for processing markdown section

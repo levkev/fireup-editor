@@ -1,10 +1,10 @@
-package modelling.tests;
+package ch.levkev.omeganote.modelling.tests;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import modelling.Title;
+import ch.levkev.omeganote.modelling.Title;
 
 public class TitleTest {
 
@@ -14,5 +14,4 @@ public class TitleTest {
 		assertEquals("title", title.getTitle());
 		assertEquals(2, title.getDegree());
 	}
-
 }

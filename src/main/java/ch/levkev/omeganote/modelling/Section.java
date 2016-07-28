@@ -1,4 +1,4 @@
-package modelling;
+package ch.levkev.omeganote.modelling;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,37 +8,22 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-import modelling.interfaces.ISection;
-import modelling.interfaces.ITitle;
+import ch.levkev.omeganote.modelling.interfaces.ISection;
+import ch.levkev.omeganote.modelling.interfaces.ITitle;
 
 public class Section implements ISection {
 
-	/**
-	 * The name of the section, declared by the top line of
-	 * the section file.
-	 */
+	public static final String SECTION_SUFFIX = ".md";
+	
 	private String name;
-	
-	/**
-	 * A list of titles, declared by a <code>#</code> sign.
-	 */
 	private ArrayList<ITitle> titles;
-	
-	/**
-	 * Everything in the file except for the first line
-	 * (which contains the name).
-	 */
 	private String content;
-	
-
-	// needed for save functionality
 	private File file;
 	
 	public Section(File file) {
-		String fileContent = readContent(file);
-		name = firstLineOf(fileContent);
-		content = withoutFirstLine(fileContent);
-		titles = findTitles();
+		this.name = extractName(file);
+		this.content = readContent(file);
+		this.titles = findTitles();
 		this.file = file;
 	}
 	
@@ -51,9 +36,13 @@ public class Section implements ISection {
 		} catch (FileNotFoundException e) { 
 			e.printStackTrace();
 		} catch (NoSuchElementException e) {
-			return "";
+			content = "";
 		}
 		return content;
+	}
+	
+	private String extractName(File file) {
+		return file.getName().replace(SECTION_SUFFIX, "");
 	}
 	
 	private ArrayList<ITitle> findTitles() {
@@ -70,28 +59,24 @@ public class Section implements ISection {
 		return titles;
 	}
 	
-	private String firstLineOf(String s) {
-		if (!s.contains("\n")) return s;
-		return s.substring(0, s.indexOf("\n"));
-	}
-	
-	private String withoutFirstLine(String s) {
-		int i = s.indexOf("\n");
-		if (i == -1) return ""; // one lined string
-		return s.substring(i + 1);
-	}
-	
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void save(String contentIncludingName) throws IOException {
-		name = firstLineOf(contentIncludingName);
-		content = withoutFirstLine(contentIncludingName);
+	public void save(String content) throws IOException {
+		this.content = content;
 		titles = findTitles();
 		FileWriter writer = new FileWriter(file);
-		writer.write(contentIncludingName);
+		writer.write(content);
 		writer.close();
+	}
+	
+	public void rename(String newName) {
+		this.name = newName;
+		String path = file.getParent();
+		File newFile = new File(path + "/" + name + SECTION_SUFFIX);
+		file.renameTo(newFile);
+		this.file = newFile;
 	}
 
 	@Override
@@ -111,4 +96,9 @@ public class Section implements ISection {
 	public String getContent() {
 		return content;
 	}
+
+	public File getFile() {
+		return file;
+	}
+	
 }

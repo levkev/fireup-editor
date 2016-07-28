@@ -1,8 +1,8 @@
-package modelling;
+package ch.levkev.omeganote.modelling;
 
 import org.pegdown.PegDownProcessor;
 
-import modelling.interfaces.IMarkdownProcessor;
+import ch.levkev.omeganote.modelling.interfaces.IMarkdownProcessor;
 
 public class MarkdownProcessor implements IMarkdownProcessor {
 

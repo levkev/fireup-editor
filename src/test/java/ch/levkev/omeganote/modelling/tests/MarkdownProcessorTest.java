@@ -1,15 +1,15 @@
-package modelling.tests;
+package ch.levkev.omeganote.modelling.tests;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import modelling.MarkdownProcessor;
+import ch.levkev.omeganote.modelling.MarkdownProcessor;
 
 public class MarkdownProcessorTest {
 
-	@Test
 	// basically garantees that markdown parsing works
+	@Test
 	public void parsesBasicMarkdown() {
 		MarkdownProcessor processor = new MarkdownProcessor();
 		String result = processor.markdownToHtml("#title");
@@ -17,5 +17,4 @@ public class MarkdownProcessorTest {
 		result = processor.markdownToHtml("##title2\n###title3");
 		assertEquals("<h2>title2</h2>\n<h3>title3</h3>", result);
 	}
-
 }

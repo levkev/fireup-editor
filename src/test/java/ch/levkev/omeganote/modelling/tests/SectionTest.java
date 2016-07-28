@@ -1,4 +1,4 @@
-package modelling.tests;
+package ch.levkev.omeganote.modelling.tests;
 
 import static org.junit.Assert.*;
 
@@ -12,7 +12,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import modelling.Section;
+import ch.levkev.omeganote.modelling.Section;
 
 public class SectionTest {
 	@Rule
@@ -20,18 +20,15 @@ public class SectionTest {
 	
 	@Test
 	public void canReadNameOfSection() throws IOException {
-		File file = tmp.newFile("test1.tmp");
-		FileWriter writer = new FileWriter(file);
-		writer.write("name\ngugus");
-		writer.close();
-		assertEquals("name", new Section(file).getName());
+		File file = tmp.newFile("test1.md");
+		assertEquals("test1", new Section(file).getName());
 	}
 	
 	@Test
 	public void recognisesTitles() throws IOException {
-		File file = tmp.newFile("test2.tmp");
+		File file = tmp.newFile("test2.md");
 		FileWriter writer = new FileWriter(file);
-		writer.write("name\n\n#title1\n\nsomething\n#title2\n###title3");
+		writer.write("#title1\n\nsomething\n#title2\n###title3");
 		writer.close();
 		Section section = new Section(file);
 		assertEquals(3, section.getTitles().size());
@@ -39,9 +36,9 @@ public class SectionTest {
 	
 	@Test
 	public void recognisesContent() throws IOException {
-		File file = tmp.newFile("test3.tmp");
+		File file = tmp.newFile("test3.md");
 		FileWriter writer = new FileWriter(file);
-		writer.write("name\ngugus");
+		writer.write("gugus");
 		writer.close();
 		Section section = new Section(file);
 		assertEquals("gugus", section.getContent());
@@ -49,55 +46,75 @@ public class SectionTest {
 	
 	@Test
 	public void sectionCanBeSaved() throws IOException, FileNotFoundException {
-		File file = tmp.newFile("test4.tmp");
+		File file = tmp.newFile("test4.md");
 		FileWriter writer = new FileWriter(file);
-		writer.write("name\ngugus");
+		writer.write("gugus");
 		writer.close();
 		Section section = new Section(file);
-		section.save("newName\nnewGugus");
+		section.save("newGugus");
 		assertEquals("newGugus", section.getContent());
-		assertEquals("newName", section.getName());
-		assertEquals("newName\nnewGugus", contentOf(file));
+		assertEquals("newGugus", contentOf(file));
 	}
 	
 	@Test
 	public void canHandleEmptySection() throws IOException {
 		// file containing empty strings
-		File file = tmp.newFile("test5.tmp");
+		File file = tmp.newFile("test5.md");
 		FileWriter writer = new FileWriter(file);
 		writer.write("");
 		writer.close();
 		Section section = new Section(file);
-		assertEquals("", section.getName());
+		assertEquals("test5", section.getName());
 		assertEquals("", section.getContent());
 		
 		// file not containing anything
-		file = tmp.newFile("test6.tmp");
+		file = tmp.newFile("test6.md");
 		section = new Section(file);
-		assertEquals("", section.getName());
+		assertEquals("test6", section.getName());
 		assertEquals("", section.getContent());
 	}
 	
 	@Test
 	public void sectionWithNameAndNoContentIsProperlyRecognised() throws IOException {
-		File file = tmp.newFile("test7.tmp");
-		FileWriter writer = new FileWriter(file);
-		writer.write("name");
-		writer.close();
+		File file = tmp.newFile("test7.md");
 		Section section = new Section(file);
-		assertEquals("name", section.getName());
+		assertEquals("test7", section.getName());
 		assertEquals("", section.getContent());
 	}
 	
 	@Test
 	public void savingSectionAlsoUpdatesTitles() throws IOException {
-		File file = tmp.newFile("test8.tmp");
+		File file = tmp.newFile("test8.md");
 		FileWriter writer = new FileWriter(file);
-		writer.write("name\n#gugus");
+		writer.write("#gugus");
 		writer.close();
 		Section section = new Section(file);
-		section.save("newName\n##gugus");
+		section.save("##gugus");
 		assertEquals(2, section.getTitles().get(0).getDegree());
+	}
+	
+	@Test
+	public void canChangeNameOfSectionAndCorrespondingFile() throws IOException {
+		File file = tmp.newFile("test9.md");
+		FileWriter writer = new FileWriter(file);
+		writer.write("gugus");
+		writer.close();
+		Section section = new Section(file);
+		section.rename("test9a");
+		assertEquals("test9a.md", section.getFile().getName());
+		assertEquals("test9a", section.getName());
+	}
+	
+	@Test
+	public void renamingPreservesContent() throws IOException {
+		File file = tmp.newFile("test9.md");
+		FileWriter writer = new FileWriter(file);
+		writer.write("gugus");
+		writer.close();
+		Section section = new Section(file);
+		section.rename("test9a");
+		assertTrue(section.getFile().exists());
+		assertEquals("gugus", contentOf(section.getFile()));
 	}
 	
 	private String contentOf(File file) throws FileNotFoundException {

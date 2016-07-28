@@ -1,7 +1,7 @@
-package modelling;
+package ch.levkev.omeganote.modelling;
 
-import modelling.interfaces.ISection;
-import modelling.interfaces.ISectionParser;
+import ch.levkev.omeganote.modelling.interfaces.ISection;
+import ch.levkev.omeganote.modelling.interfaces.ISectionParser;
 
 public class SectionParser implements ISectionParser {
 	

@@ -1,4 +1,4 @@
-package modelling.interfaces;
+package ch.levkev.omeganote.modelling.interfaces;
 
 /**
  * Parses section content to return plain HTML.

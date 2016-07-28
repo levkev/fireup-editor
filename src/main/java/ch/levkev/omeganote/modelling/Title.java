@@ -1,6 +1,6 @@
-package modelling;
+package ch.levkev.omeganote.modelling;
 
-import modelling.interfaces.ITitle;
+import ch.levkev.omeganote.modelling.interfaces.ITitle;
 
 public class Title implements ITitle {
 

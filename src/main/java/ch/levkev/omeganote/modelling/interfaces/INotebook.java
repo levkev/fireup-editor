@@ -1,4 +1,4 @@
-package modelling.interfaces;
+package ch.levkev.omeganote.modelling.interfaces;
 
 import java.util.ArrayList;
 
