@@ -5,12 +5,7 @@ import java.io.File;
 import ch.levkev.omeganote.MainApp;
 import ch.levkev.omeganote.modelling.Notebook;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
-import javafx.scene.web.WebView;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.FileChooser;
 
 public class NotebookController {
     private MainApp mainApp;

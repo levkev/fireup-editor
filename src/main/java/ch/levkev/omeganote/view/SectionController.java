@@ -1,13 +1,14 @@
 package ch.levkev.omeganote.view;
 
+import java.io.IOException;
+
 import ch.levkev.omeganote.MainApp;
-import ch.levkev.omeganote.modelling.Notebook;
 import ch.levkev.omeganote.modelling.interfaces.ISection;
 import ch.levkev.omeganote.modelling.interfaces.ITitle;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ListView;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.web.WebView;
 
@@ -64,6 +65,7 @@ public class SectionController {
 	}
 
 	private void loadTitles() {
+		this.titlesList.getItems().clear();
 		for (ITitle title : this.section.getTitles()) {
 			this.titlesList.getItems().add(title.getTitle());
 		}
@@ -81,6 +83,16 @@ public class SectionController {
     
     @FXML
     private void onProcessButtonClicked() {
-    	
+
+    	try {
+    		this.section.save(this.textarea.getText());
+    	} catch (IOException e) {
+    		Alert alert = new Alert(AlertType.ERROR);
+    		alert.setTitle("Error Dialog");
+    		alert.setContentText("Ooops, there was an error while saving the section");
+
+    		alert.showAndWait();
+    	}
+    	this.loadTitles();
     }
 }
