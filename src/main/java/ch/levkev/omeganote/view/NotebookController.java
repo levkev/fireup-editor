@@ -36,7 +36,7 @@ public class NotebookController {
     	DirectoryChooser dirChooser = new DirectoryChooser();
     	dirChooser.setTitle("Open Resource File");
     	File selectedDir = dirChooser.showDialog(this.mainApp.getPrimaryStage());
-    	
+    	if (selectedDir == null) return;
     	
     	Notebook nb = new Notebook(selectedDir.getPath());
     	this.mainApp.setCurrentNotebook(nb);
