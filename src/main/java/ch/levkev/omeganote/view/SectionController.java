@@ -7,6 +7,7 @@ import ch.levkev.omeganote.modelling.interfaces.ISection;
 import ch.levkev.omeganote.modelling.interfaces.ITitle;
 import ch.levkev.omeganote.modelling.SectionParser;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ListView;
@@ -37,7 +38,7 @@ public class SectionController {
      */
     @FXML
     private void initialize() {
-
+    	this.applyCss();
     }
 
     /**
@@ -55,13 +56,17 @@ public class SectionController {
     	
     	this.loadContent();
     	this.loadTitles();
-    	this.parseContent();
+    	this.updateParsedContent();
     }
     
+    private void applyCss() {
+    	WebEngine engine = output.getEngine();
+    	engine.setUserStyleSheetLocation(getClass().getResource("output.css").toString());
+    	// Scene scene = mainApp.getPrimaryStage().getScene();
+    	// scene.getStylesheets().add("textarea.css");
+    }
     
-    
-    
-    private void parseContent() {
+    private void updateParsedContent() {
     	SectionParser parser = new SectionParser();
     	String parsedContent = parser.sectionToHtml(section);
     	WebEngine engine = output.getEngine();
@@ -77,12 +82,11 @@ public class SectionController {
 
 	private void loadContent() {
 		this.textarea.setText(this.section.getContent());
-		
 	}
 
 	@FXML
     private void onTextChanged() {
-    	
+		
     }
     
     @FXML
@@ -98,6 +102,6 @@ public class SectionController {
     		alert.showAndWait();
     	}
     	this.loadTitles();
-    	this.parseContent();
+    	this.updateParsedContent();
     }
 }
