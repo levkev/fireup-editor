@@ -6,7 +6,9 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="500.0" prefWidth="798.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.levkev.omeganote.view.NotebookController">
    <children>
@@ -21,7 +23,19 @@
                            <children>
                               <VBox prefHeight="244.0" prefWidth="553.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <Label fx:id="currentDirectoryLabel" text="Label" />
+                                    <HBox prefHeight="22.0" prefWidth="533.0">
+                                       <children>
+                                          <Label fx:id="currentDirectoryLabel" text="Label" />
+                                          <Button mnemonicParsing="false" onMouseClicked="#onUpButtonClicked" text="Up">
+                                             <font>
+                                                <Font size="8.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="30.0" />
+                                             </HBox.margin>
+                                          </Button>
+                                       </children>
+                                    </HBox>
                                     <ListView fx:id="currentDirectoriesList" onMouseClicked="#onListItemClicked" prefHeight="200.0" prefWidth="200.0" />
                                  </children>
                                  <padding>

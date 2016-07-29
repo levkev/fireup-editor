@@ -77,12 +77,19 @@ public class NotebookController {
     @FXML
     private void onListItemClicked() {
     	IFolder clickedFolder = this.currentDirectoriesList.getSelectionModel().getSelectedItem();
+    	if (clickedFolder == null) return;
     	if (clickedFolder.isNotebook()) {
     		this.openNotebook(clickedFolder.getFile());
     	} else {
     		this.currentDirectory = clickedFolder.getFile();
     		this.updateCurrentDirectoryList();
     	}
+    }
+    
+    @FXML
+    private void onUpButtonClicked() {
+    	this.currentDirectory = this.getCurrentDirectory().toPath().getParent().toFile();
+    	this.updateCurrentDirectoryList();
     }
     
     private File getCurrentDirectory() {
