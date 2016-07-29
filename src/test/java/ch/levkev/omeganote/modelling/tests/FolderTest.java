@@ -83,4 +83,12 @@ public class FolderTest {
 		assertEquals(0, folder1.compareTo(folder2));
 		assertEquals(0, folder2.compareTo(folder1));
 	}
+	
+	@Test
+	public void folderWillReturnRightToString() {
+		File file1 = new File(this.tmp.getRoot() + "/folder1");
+		Folder folder1 = new Folder(file1);
+		
+		assertEquals("folder1", folder1.toString());
+	}
 }

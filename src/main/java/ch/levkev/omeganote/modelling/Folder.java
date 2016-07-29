@@ -38,5 +38,9 @@ public class Folder implements IFolder, Comparable<IFolder> {
 		}
 		return 0;
 	}
-
+	
+	@Override
+	public String toString() {
+		return this.getFile().getName();
+	}
 }
