@@ -91,12 +91,18 @@ public class EditorController {
     }
     
     private void loadNotebook() {
-    	
     	this.loadTabs();
+    	if (noTabs()) {
+    		onNewTabClicked();
+    	}
     	
     }
     
-    @FXML
+    private boolean noTabs() {
+    	return this.tabpane.getTabs().size() == 1;
+	}
+
+	@FXML
     private void onNewTabClicked() {
     	TextInputDialog dialog = new TextInputDialog("new section");
     	dialog.setTitle("Enter name for section");
@@ -105,6 +111,11 @@ public class EditorController {
     	Optional<String> result = dialog.showAndWait();
     	if (result.isPresent()){
     	    this.createNewSection(result.get());
+    	}
+    	else {
+    		if (noTabs()) {
+    			onNewTabClicked();
+    		}
     	}
     }
     

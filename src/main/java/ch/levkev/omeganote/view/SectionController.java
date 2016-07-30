@@ -16,7 +16,10 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
 public class SectionController {
-    private MainApp mainApp;
+    public static final String OUTPUT_CSS_LOCATION = "css/output.css";
+	public static final String TEXTAREA_CSS_LOCATION = "css/textarea.css";
+    
+	private MainApp mainApp;
 
     @FXML
     private TextArea textarea;
@@ -61,9 +64,11 @@ public class SectionController {
     
     private void applyCss() {
     	WebEngine engine = output.getEngine();
-    	engine.setUserStyleSheetLocation(getClass().getResource("output.css").toString());
+    	engine.setUserStyleSheetLocation(getClass().getResource(OUTPUT_CSS_LOCATION).toString());
+    	
+    	// the following line throws a NullPointerException, presumably because no scene exists.
     	// Scene scene = mainApp.getPrimaryStage().getScene();
-    	// scene.getStylesheets().add("textarea.css");
+    	// scene.getStylesheets().add(TEXTAREA_CSS_LOCATION);
     }
     
     private void updateParsedContent() {
