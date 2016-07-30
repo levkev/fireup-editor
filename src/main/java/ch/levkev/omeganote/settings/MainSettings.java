@@ -3,6 +3,8 @@ package ch.levkev.omeganote.settings;
 import java.io.File;
 import java.util.prefs.Preferences;
 
+import com.google.inject.Inject;
+
 /**
  * this class holds all other settings classes and provide some general settings
  * 
@@ -17,6 +19,7 @@ public class MainSettings {
 	public static final String HOME_DIRECTORY_KEY = "homeDir";
 	private Preferences prefs;
 	
+	@Inject
 	public MainSettings(FormattingSettings formatting, SpellingSettings spelling, AutocorrectSettings autoCorrect) {
 		this.formattingSettings = formatting;
 		this.spellingSettings = spelling;

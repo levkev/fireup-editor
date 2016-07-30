@@ -2,7 +2,12 @@ package ch.levkev.omeganote;
 
 import java.io.IOException;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+
+import ch.levkev.omeganote.conatiner.MainSettingsModule;
 import ch.levkev.omeganote.modelling.Notebook;
+import ch.levkev.omeganote.settings.MainSettings;
 import ch.levkev.omeganote.view.EditorController;
 import ch.levkev.omeganote.view.NotebookController;
 import ch.levkev.omeganote.view.RootController;
@@ -23,14 +28,17 @@ public class MainApp extends Application {
 	private Stage primaryStage;
 	private BorderPane rootLayout;
 	private Notebook currentNotebook;
+	private MainSettings settings;
 	
 	@Override
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("MainApp");
 		
-		initRootLayout();
+		Injector injector = Guice.createInjector(new MainSettingsModule());
+		this.settings = injector.getInstance(MainSettings.class);
 		
+		initRootLayout();
 		showEditorView();
 	}
 	
@@ -108,6 +116,10 @@ public class MainApp extends Application {
     
 	public static void main(String[] args) {
 		launch(args);
+	}
+	
+	public MainSettings getSettings() {
+		return this.settings;
 	}
 	
 }
