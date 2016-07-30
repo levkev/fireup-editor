@@ -65,9 +65,10 @@ public class NotebookController {
     }
     
     @FXML
-    private void onOpenButtonClicked() {
+    private void onNewButtonClicked() {
     	DirectoryChooser dirChooser = new DirectoryChooser();
-    	dirChooser.setTitle("Open Resource File");
+    	dirChooser.setTitle("New Notebook location");
+    	dirChooser.setInitialDirectory(this.getCurrentDirectory());
     	File selectedDir = dirChooser.showDialog(this.mainApp.getPrimaryStage());
     	if (selectedDir == null) return;
     	

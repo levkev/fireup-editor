@@ -48,7 +48,7 @@
                            <children>
                               <VBox prefHeight="244.0" prefWidth="553.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <Button mnemonicParsing="false" onMouseClicked="#onOpenButtonClicked" text="Open" />
+                                    <Button mnemonicParsing="false" onMouseClicked="#onNewButtonClicked" text="New" />
                                  </children>
                                  <padding>
                                     <Insets left="20.0" top="20.0" />
