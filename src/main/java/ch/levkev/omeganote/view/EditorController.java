@@ -104,7 +104,11 @@ public class EditorController {
 
 	@FXML
     private void onNewTabClicked() {
-    	TextInputDialog dialog = new TextInputDialog("new section");
+    	openNewTabDialog();
+    }
+	
+	private void openNewTabDialog() {
+		TextInputDialog dialog = new TextInputDialog("new section");
     	dialog.setTitle("Enter name for section");
     	dialog.setContentText("Please enter the name of your new section:");
 
@@ -114,10 +118,10 @@ public class EditorController {
     	}
     	else {
     		if (noTabs()) {
-    			onNewTabClicked();
+    			openNewTabDialog(); // notebook without sections does not make sense.
     		}
     	}
-    }
+	}
     
     private void createNewSection(String name) {
 		File sectionFile = new File(
