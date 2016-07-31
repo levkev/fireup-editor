@@ -61,31 +61,6 @@ public class Section implements ISection {
 		return titles;
 	}
 	
-	/*private TitleTree[] findTitleTrees() {
-		ArrayList<ITitle> titles = findTitles();
-		int numberOfTitles = titles.size();
-		TitleTree[] titleTrees = new TitleTree[numberOfTitles];
-		
-		for (int currentTitleIndex = 0; currentTitleIndex < numberOfTitles; currentTitleIndex++) {
-			ITitle currentTitle = titles.get(currentTitleIndex);
-			ArrayList<ITitle> descendants = new ArrayList<ITitle>();
-			boolean done = false;
-			for (int potentialChildIndex = currentTitleIndex + 1; !done && potentialChildIndex < numberOfTitles; potentialChildIndex++) {
-				ITitle potentialChild = titles.get(potentialChildIndex);
-				if (potentialChild.getDegree() <= currentTitle.getDegree()) {
-					done = true;
-				}
-				else {
-					descendants.add(potentialChild);
-				}
-			}
-			TitleTree currentTitleTree = new TitleTree(currentTitle, descendants);
-			titleTrees[currentTitleIndex] = currentTitleTree;
-		}
-		
-		return titleTrees;
-	}*/
-	
 	/**
 	 * {@inheritDoc}
 	 */
