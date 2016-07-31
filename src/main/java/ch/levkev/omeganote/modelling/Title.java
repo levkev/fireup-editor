@@ -45,4 +45,6 @@ public class Title implements ITitle {
 		return (title == ((Title)otherTitle).getTitle() 
 				&& degree == ((Title)otherTitle).getDegree());
 	}
+	
+	
 }

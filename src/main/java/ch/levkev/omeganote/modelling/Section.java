@@ -27,6 +27,8 @@ public class Section implements ISection {
 		this.file = file;
 	}
 	
+
+
 	private String readContent(File file) {
 		String content = null;
 		try {

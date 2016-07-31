@@ -17,4 +17,11 @@ public class MarkdownProcessorTest {
 		result = processor.markdownToHtml("##title2\n###title3");
 		assertEquals("<h2>title2</h2>\n<h3>title3</h3>", result);
 	}
+	
+	@Test
+	public void dollarSignIsNotEscaped() {
+		MarkdownProcessor processor = new MarkdownProcessor();
+		String result = processor.markdownToHtml("$");
+		assertEquals("<p>$</p>", result);
+	}
 }

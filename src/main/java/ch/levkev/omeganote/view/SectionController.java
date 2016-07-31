@@ -41,7 +41,7 @@ public class SectionController {
      */
     @FXML
     private void initialize() {
-    	this.applyCss();
+    	
     }
 
     /**
@@ -51,6 +51,8 @@ public class SectionController {
      */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
+        this.applyCss();
+        
     }
     
     public void setSection(ISection section) {
@@ -65,10 +67,10 @@ public class SectionController {
     private void applyCss() {
     	WebEngine engine = output.getEngine();
     	engine.setUserStyleSheetLocation(getClass().getResource(OUTPUT_CSS_LOCATION).toString());
+
+        Scene scene = mainApp.getPrimaryStage().getScene();
+        scene.getStylesheets().add(getClass().getResource(TEXTAREA_CSS_LOCATION).toString());
     	
-    	// the following line throws a NullPointerException, presumably because no scene exists.
-    	// Scene scene = mainApp.getPrimaryStage().getScene();
-    	// scene.getStylesheets().add(TEXTAREA_CSS_LOCATION);
     }
     
     private void updateParsedContent() {
