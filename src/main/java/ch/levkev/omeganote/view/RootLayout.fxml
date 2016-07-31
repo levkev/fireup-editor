@@ -20,6 +20,7 @@
                   <Insets right="50.0" />
                </HBox.margin>
             </Button>
+            <Button mnemonicParsing="false" onMouseClicked="#onSettingsButtonClicked" text="Settings" />
          </children>
          <BorderPane.margin>
             <Insets />

@@ -43,4 +43,9 @@ public class RootController {
     private void onNotebookButtonClicked() {
     	this.mainApp.showNotebookView();
     }
+    
+    @FXML
+    private void onSettingsButtonClicked() {
+    	this.mainApp.showSettingsView();
+    }
 }
