@@ -26,6 +26,9 @@ public class Title implements ITitle {
 		return degree;
 	}
 
+	/**
+	 * returns the title indented according to its degree
+	 */
 	@Override
 	public String toString() {
 		String spaces = "";
