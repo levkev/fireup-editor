@@ -31,7 +31,7 @@ public class NotebookController {
      */
     @FXML
     private void initialize() {
-    	this.updateCurrentDirectoryList();
+    	
     }
     
     /**
@@ -62,6 +62,7 @@ public class NotebookController {
      */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
+    	this.updateCurrentDirectoryList();
     }
     
     @FXML
@@ -95,7 +96,7 @@ public class NotebookController {
     
     private File getCurrentDirectory() {
     	if (this.currentDirectory == null) {
-    		this.currentDirectory = new File(System.getProperty("user.home")); 
+    		this.currentDirectory = this.mainApp.getSettings().getHomeDirectory(); 
     	}
     	return this.currentDirectory;
     }
