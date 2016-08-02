@@ -16,14 +16,14 @@ public class Section implements ISection {
 	public static final String SECTION_SUFFIX = ".md";
 	
 	private String name;
-	private ArrayList<ITitle> titles;
+	private ArrayList<TitleNode> titleNodes;
 	private String content;
 	private File file;
 	
 	public Section(File file) {
 		this.name = extractName(file);
 		this.content = readContent(file);
-		this.titles = findTitles();
+		this.titleNodes = findTitleNodes();
 		this.file = file;
 	}
 	
@@ -47,18 +47,18 @@ public class Section implements ISection {
 		return file.getName().replace(SECTION_SUFFIX, "");
 	}
 	
-	private ArrayList<ITitle> findTitles() {
-		ArrayList<ITitle> titles = new ArrayList<ITitle>();
+	private ArrayList<TitleNode> findTitleNodes() {
+		TitleTreeListBuilder builder = new TitleTreeListBuilder();
 		@SuppressWarnings("resource") // eclipse does not notice that the scanner will be closed
 		Scanner lineScanner = new Scanner(content).useDelimiter("\n");
 		while (lineScanner.hasNext()) {
 			String line = lineScanner.next();
 			if (line.startsWith("#")) {
-				titles.add(new Title(line));
+				builder.add(new Title(line));
 			}
 		}
 		lineScanner.close();
-		return titles;
+		return builder.getTrees();
 	}
 	
 	/**
@@ -67,7 +67,7 @@ public class Section implements ISection {
 	@Override
 	public void save(String content) throws IOException {
 		this.content = content;
-		titles = findTitles();
+		titleNodes = findTitleNodes();
 		FileWriter writer = new FileWriter(file);
 		writer.write(content);
 		writer.close();
@@ -87,8 +87,8 @@ public class Section implements ISection {
 	}
 
 	@Override
-	public ArrayList<ITitle> getTitles() {
-		return titles;
+	public ArrayList<TitleNode> getTitleNodes() {
+		return titleNodes;
 	}
 
 	/**

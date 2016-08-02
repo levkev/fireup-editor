@@ -44,9 +44,16 @@ public class TitleTreeListBuilder {
 					childAdded = true;
 				}
 				else {
-					TitleNode newTitleNode = titleNodeStack.peek().addChild(title);
-					titleNodeStack.push(newTitleNode);
-					childAdded = true;
+					if (!titleNodeStack.isEmpty()) {
+						TitleNode newTitleNode = titleNodeStack.peek().addChild(title);
+						titleNodeStack.push(newTitleNode);
+						childAdded = true;
+					}
+					else {
+						titleNodeStack.push(new TitleNode(title));
+						nodes.add(titleNodeStack.peek());
+						childAdded = true;
+					}
 				}
 			}
 		}

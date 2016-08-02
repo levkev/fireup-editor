@@ -65,4 +65,11 @@ public class TitleTreeListBuilderTest {
 		assertEquals(expected0, result.get(0).toArrayStringRepresentation());
 		assertEquals(expected1, result.get(1).toArrayStringRepresentation());
 	}
+	
+	@Test
+	public void doesNotDependOnStartingWithFirstDegreeTitle() {
+		TitleTreeListBuilder builder = new TitleTreeListBuilder();
+		builder.add(new Title("##2"));
+		// success if no exception is thrown
+	}
 }

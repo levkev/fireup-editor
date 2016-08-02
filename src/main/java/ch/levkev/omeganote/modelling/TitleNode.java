@@ -49,6 +49,10 @@ public class TitleNode {
 		return this.title.toString();
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public String toArrayStringRepresentation() {
 		if (children.isEmpty()) {
 			return title.getTitle();
