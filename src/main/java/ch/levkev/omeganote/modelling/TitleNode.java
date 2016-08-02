@@ -46,13 +46,17 @@ public class TitleNode {
 	}
 	
 	public String toString() {
+		return this.title.toString();
+	}
+	
+	public String toArrayStringRepresentation() {
 		if (children.isEmpty()) {
 			return title.getTitle();
 		}
 		else {
 			String string = title.getTitle() + ": [";
 			for (TitleNode child : children) {
-				string += child.toString() + ", ";
+				string += child.toArrayStringRepresentation() + ", ";
 			}
 			string = string.substring(0, string.length() - 2); // removing last comma
 			string += "]";

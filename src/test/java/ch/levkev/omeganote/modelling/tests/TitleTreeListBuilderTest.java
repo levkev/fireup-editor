@@ -58,9 +58,11 @@ public class TitleTreeListBuilderTest {
 		for (int i = 0; i < 10; i++) 
 			builder.add(titles.get(i));
 		
-		String expected = "[1: [2: [4, 5], 3], a: [b: [d, e], c]]";
+		String expected0 = "1: [2: [4, 5], 3]";
+		String expected1 = "a: [b: [d, e], c]";
 		
 		ArrayList<TitleNode> result = builder.getTrees();
-		assertEquals(expected, result.toString());
+		assertEquals(expected0, result.get(0).toArrayStringRepresentation());
+		assertEquals(expected1, result.get(1).toArrayStringRepresentation());
 	}
 }
