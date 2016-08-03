@@ -1,4 +1,4 @@
-package ch.levkev.omeganote.modelling.tests;
+package ch.levkev.omeganote.modelling;
 
 import static org.junit.Assert.*;
 
@@ -71,5 +71,13 @@ public class TitleTreeListBuilderTest {
 		TitleTreeListBuilder builder = new TitleTreeListBuilder();
 		builder.add(new Title("##2"));
 		// success if no exception is thrown
+	}
+	
+	@Test
+	public void canAddMoreThanOneDegreeTwoTitle() {
+		TitleTreeListBuilder builder = new TitleTreeListBuilder();
+		builder.add(new Title("##1"));
+		builder.add(new Title("##2"));
+		assertEquals("[  1,   2]", builder.getTrees().toString());
 	}
 }

@@ -39,7 +39,14 @@ public class TitleTreeListBuilder {
 				}
 				else if (degree == rootDegree) {
 					titleNodeStack.pop();
-					TitleNode newTitleNode = titleNodeStack.peek().addChild(title);
+					TitleNode newTitleNode;
+					if (!titleNodeStack.isEmpty()) {
+						newTitleNode = titleNodeStack.peek().addChild(title);
+					}
+					else {
+						newTitleNode = new TitleNode(title);
+						nodes.add(newTitleNode);
+					}
 					titleNodeStack.push(newTitleNode);
 					childAdded = true;
 				}

@@ -9,7 +9,6 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import ch.levkev.omeganote.modelling.interfaces.ISection;
-import ch.levkev.omeganote.modelling.interfaces.ITitle;
 
 public class Section implements ISection {
 

@@ -40,7 +40,7 @@ public class Title implements ITitle {
 	
 	/**
 	 * Assumes that the object the title is being compared to
-	 * is actually a title object. Will throw an exception if
+	 * is actually a title object. Will throw a RunTimeException if
 	 * being compared to any other object.
 	 */
 	@Override
