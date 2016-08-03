@@ -1,5 +1,6 @@
 package ch.levkev.omeganote.settings;
 
+import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -56,14 +57,13 @@ public class MainSettingsTest {
 	@Test
 	public void homeDirectoryIsAnotherWhenReadFromProperties() {
 		this.prefs.put(MainSettings.HOME_DIRECTORY_KEY, "/tmp");
-		
-		assertEquals("/tmp", this.mainSettings.getHomeDirectory().getPath());
+		assertThat(this.mainSettings.getHomeDirectory().getPath(), Matchers.either(Matchers.is("/tmp")).or(Matchers.is("\\tmp")));
 	}
 
 	@Test
 	public void canSaveHomeDirectoryKey() {
 		this.mainSettings.setHomeDirectory("/tmp");
-		assertEquals("/tmp", this.mainSettings.getHomeDirectory().getPath());
+		assertThat(this.mainSettings.getHomeDirectory().getPath(), Matchers.either(Matchers.is("/tmp")).or(Matchers.is("\\tmp")));
 	}
 	@After
 	public void tearDown() throws BackingStoreException {
