@@ -3,7 +3,6 @@ package ch.levkev.omeganote.settings;
 import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -19,7 +18,7 @@ public class MainSettingsTest {
 	private AutocorrectSettings autoCorrectSettings;
 	private FormattingSettings formattingSettings;
 	private SpellingSettings spellingSettings;
-	private String homeDirectory = "/tmp/";
+//	private String homeDirectory = "/tmp/";
 	private Preferences prefs;
 	
 	@Before
