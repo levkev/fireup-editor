@@ -8,8 +8,8 @@ public class SectionParser implements ISectionParser {
 	@Override
 	public String sectionToHtml(ISection section) {
 		MarkdownProcessor processor = new MarkdownProcessor();
-		// will process mathjax here
-		return processor.markdownToHtml(section.getContent());
+		String html =  processor.markdownToHtml(section.getContent());
+		MathJaxInjector injector = new MathJaxInjector();
+		return injector.inject(html);
 	}
-
 }
