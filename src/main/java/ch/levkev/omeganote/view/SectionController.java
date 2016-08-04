@@ -6,6 +6,7 @@ import ch.levkev.omeganote.MainApp;
 import ch.levkev.omeganote.modelling.interfaces.ISection;
 import ch.levkev.omeganote.modelling.interfaces.ITitle;
 import ch.levkev.omeganote.modelling.SectionParser;
+import ch.levkev.omeganote.modelling.TitleNode;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -82,8 +83,17 @@ public class SectionController {
 
 	private void loadTitles() {
 		this.titlesList.getItems().clear();
-		for (ITitle title : this.section.getTitles()) {
-			this.titlesList.getItems().add(title);
+		for (TitleNode titleNode : this.section.getTitleNodes()) {
+			this.titlesList.getItems().add(titleNode.getTitle());
+			if (!titleNode.isCollapsed())
+				loadChildren(titleNode);
+		}
+	}
+	
+	private void loadChildren(TitleNode titleNode) {
+		for (TitleNode child : titleNode.getChildren()) {
+			this.titlesList.getItems().add(child.getTitle());
+			loadChildren(child);
 		}
 	}
 

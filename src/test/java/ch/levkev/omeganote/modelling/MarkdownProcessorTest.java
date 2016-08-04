@@ -1,4 +1,4 @@
-package ch.levkev.omeganote.modelling.tests;
+package ch.levkev.omeganote.modelling;
 
 import static org.junit.Assert.*;
 

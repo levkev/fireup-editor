@@ -1,4 +1,4 @@
-package ch.levkev.omeganote.modelling.tests;
+package ch.levkev.omeganote.modelling;
 
 import static org.junit.Assert.*;
 
@@ -28,10 +28,10 @@ public class SectionTest {
 	public void recognisesTitles() throws IOException {
 		File file = tmp.newFile("test2.md");
 		FileWriter writer = new FileWriter(file);
-		writer.write("#title1\n\nsomething\n#title2\n###title3");
+		writer.write("#title1\n\nsomething\n#title2");
 		writer.close();
 		Section section = new Section(file);
-		assertEquals(3, section.getTitles().size());
+		assertEquals(2, section.getTitleNodes().size());
 	}
 	
 	@Test
@@ -90,7 +90,7 @@ public class SectionTest {
 		writer.close();
 		Section section = new Section(file);
 		section.save("##gugus");
-		assertEquals(2, section.getTitles().get(0).getDegree());
+		assertEquals(2, section.getTitleNodes().get(0).getDegree());
 	}
 	
 	@Test
