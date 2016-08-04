@@ -86,14 +86,16 @@ public class SectionController {
 		for (TitleNode titleNode : this.section.getTitleNodes()) {
 			this.titlesList.getItems().add(titleNode.getTitle());
 			if (!titleNode.isCollapsed())
-				loadChildren(titleNode);
+				loadDescendants(titleNode);
 		}
 	}
 	
-	private void loadChildren(TitleNode titleNode) {
+	private void loadDescendants(TitleNode titleNode) {
 		for (TitleNode child : titleNode.getChildren()) {
 			this.titlesList.getItems().add(child.getTitle());
-			loadChildren(child);
+			if (!child.isCollapsed()) {	
+				loadDescendants(child);
+			}
 		}
 	}
 
